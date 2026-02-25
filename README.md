@@ -36,12 +36,14 @@ A unified C++ toolkit for YOLO `v5/v8/v11/v26/...`, covering `classification/det
 ```
 build options when run cmake command:
 -DBUILD_WITH_ORT=ON   # enable ONNXRuntime as inference backend
--DBUILD_WITH_OVN=ON   # enable OpenVINO as inference backend
--DBUILD_WITH_TRT=ON   # enable TensorRT as inference backend
--DBUILD_WITH_RKN=ON   # enable RKNN as inference backend
--DBUILD_WITH_CML=ON   # enable CoreML as inference backend
+-DBUILD_WITH_OVN=ON   # enable OpenVINO(Intel Platform) as inference backend
+-DBUILD_WITH_TRT=ON   # enable TensorRT(Nvidia/CUDA Platform) as inference backend
+-DBUILD_WITH_RKN=ON   # enable RKNN(RockChip Platform) as inference backend
+-DBUILD_WITH_CML=ON   # enable CoreML(Apple Platform) as inference backend
 -DBUILD_WITH_PDL=ON   # enable PaddlePaddle as inference backend
--DBUILD_WITH_CAN=ON   # enable CANN as inference backend
+-DBUILD_WITH_CAN=ON   # enable CANN(HuaWei Platform) as inference backend
+-DBUILD_WITH_DEL=ON   # enable Denglin's SDK(Denglin/登临 Platform) as inference backend
+-DBUILD_WITH_CAB=ON   # enable Cambricon'SDK(Cambricon/寒武纪 Platform) as inference backend
 ...
 
 if you just run `cmake ..` without any options, 
