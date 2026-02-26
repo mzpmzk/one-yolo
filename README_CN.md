@@ -76,11 +76,11 @@ int main() {
     cfg.num_classes = 6;
     cfg.names       = {"person", "car", "bus", "truck", "2wheel", "other"};
 
-    /* 2. 创建模型 */
+    /* 2. 创建Yolo模型 */
     auto model = Yolo(cfg);
     model.info();
 
-    /* 3. 构建跟踪配置 */
+    /* 3. 构建 YoloTrackConfig */
     YoloTrackConfig t_cfg;
     t_cfg.algo = YoloTrackAlgo::SORT;
     t_cfg.iou_thresh = 0.6f;
@@ -102,18 +102,31 @@ int main() {
             cv::resize(frame, frame, cv::Size(), 0.5, 0.5);
         }
         
+        // 以batch模式预测（batch size == 1）
         auto results = model(std::vector<cv::Mat>{frame});
         tracker(results[0]);
 
+        // 打印输出结果
         results[0].info();
         results[0].to_json(true);
         results[0].to_csv(true);
 
+        // 显示结果
         if (results[0].show(
             false, 1.0f, DrawParam(),
             true, true) == 27) {
             break;
         }
+
+        /*
+         * 你还可以通过下面的方式获取预测的结果:
+         * auto boxes        = results[0].boxes();          // get bounding boxes in detection task
+         * auto cls_ids      = results[0].cls_ids();        // get class ids in detection task
+         * auto confs        = results[0].confs();          // get confidences in detection task
+         * auto labels       = results[0].labels();         // get labels in detection task
+         * auto track_ids    = results[0].track_ids();      // get track ids in detection task
+         * auto track_points = results[0].track_points();   // get track points in detection task
+        */
     }
 }
 ```
