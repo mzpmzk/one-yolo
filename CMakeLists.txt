@@ -1,3 +1,11 @@
+#       ____  _   _ ______  __     ______  _      ____  
+#      / __ \| \ | |  ____| \ \   / / __ \| |    / __ \ 
+#     | |  | |  \| | |__     \ \_/ / |  | | |   | |  | |
+#     | |  | | . ` |  __|     \   /| |  | | |   | |  | |
+#     | |__| | |\  | |____     | | | |__| | |___| |__| |
+#      \____/|_| \_|______|    |_|  \____/|______\____/ 
+#                                                       
+#                                     @zhouzhi since 2025           
 cmake_minimum_required(VERSION 3.10)
 project(one-yolo VERSION 1.0)
 
@@ -32,6 +40,7 @@ file(GLOB_RECURSE TRACK_SRCS "src/track/*.cpp")
 file(GLOB_RECURSE ORT_SRCS "src/ort/*.cpp")
 file(GLOB_RECURSE OVN_SRCS "src/ovn/*.cpp")
 file(GLOB_RECURSE TRT_SRCS "src/trt/*.cpp")
+file(GLOB_RECURSE RKN_SRCS "src/rkn/*.cpp")
 list(APPEND ONE_YOLO_DEPEND_SRCS ${BASE_SRCS} ${TRACK_SRCS})
 list(APPEND ONE_YOLO_DEPEND_LIBS ${OpenCV_LIBS})
 
@@ -62,6 +71,15 @@ if(BUILD_WITH_TRT)
     add_definitions(-DBUILD_WITH_TRT)
     list(APPEND ONE_YOLO_DEPEND_SRCS ${TRT_SRCS})
     list(APPEND ONE_YOLO_DEPEND_LIBS nvinfer cudart)
+endif()
+# enable rknn, 
+# make sure rknn runtime installed and include & libs path could be found by cmake
+if(BUILD_WITH_RKN)
+    include_directories("/sd/z/rknnrt/include")
+    link_directories("/sd/z/rknnrt/libs")
+    add_definitions(-DBUILD_WITH_RKN)
+    list(APPEND ONE_YOLO_DEPEND_SRCS ${RKN_SRCS})
+    list(APPEND ONE_YOLO_DEPEND_LIBS rknnrt)
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${ONE_YOLO_DEPEND_SRCS})
