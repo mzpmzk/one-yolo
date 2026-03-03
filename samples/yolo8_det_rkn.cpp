@@ -25,9 +25,9 @@ int main() {
     YoloTrackConfig t_cfg;
     t_cfg.algo = YoloTrackAlgo::SORT;
 
-    /* 4. create YoloTrackers using YoloTrackConfig */
-    auto tracker0 = YoloTracker(t_cfg);
-    tracker0.info();
+    /* 4. create YoloTracker using YoloTrackConfig */
+    auto tracker = YoloTracker(t_cfg);
+    tracker.info();
 
     /* open video and predict frames in a loop */
     cv::VideoCapture cap("./vp_data/test_video/vehicle_stop.mp4");
@@ -39,11 +39,11 @@ int main() {
             continue;
         }
 
-        // predict with batch mode (batch size == 2)
+        // predict with batch mode (batch size == 1)
         auto results = model(std::vector<cv::Mat>{frame});
         
         // track result
-        tracker0(results[0]);
+        tracker(results[0]);
 
         // show and print
         results[0].info();           // print summary for the first result
