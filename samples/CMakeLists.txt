@@ -26,6 +26,9 @@ target_link_libraries(yolo8_cls ${PROJECT_NAME})
 add_executable(yolo8_cls2 "yolo8_cls2.cpp")
 target_link_libraries(yolo8_cls2 ${PROJECT_NAME})
 
+add_executable(yolo8_det_rkn "yolo8_det_rkn.cpp")
+target_link_libraries(yolo8_det_rkn ${PROJECT_NAME})
+
 add_executable(yolo8_det "yolo8_det.cpp")
 target_link_libraries(yolo8_det ${PROJECT_NAME})
 
@@ -58,6 +61,9 @@ target_link_libraries(yolo11_cls ${PROJECT_NAME})
 
 add_executable(yolo11_cls2 "yolo11_cls2.cpp")
 target_link_libraries(yolo11_cls2 ${PROJECT_NAME})
+
+add_executable(yolo11_det_rkn "yolo11_det_rkn.cpp")
+target_link_libraries(yolo11_det_rkn ${PROJECT_NAME})
 
 add_executable(yolo11_det "yolo11_det.cpp")
 target_link_libraries(yolo11_det ${PROJECT_NAME})
@@ -97,6 +103,9 @@ target_link_libraries(yolo26_obb ${PROJECT_NAME})
 
 add_executable(yolo26_pose "yolo26_pose.cpp")
 target_link_libraries(yolo26_pose ${PROJECT_NAME})
+
+add_executable(yolo26_seg_rkn "yolo26_seg_rkn.cpp")
+target_link_libraries(yolo26_seg_rkn ${PROJECT_NAME})
 
 add_executable(yolo26_seg "yolo26_seg.cpp")
 target_link_libraries(yolo26_seg ${PROJECT_NAME})
